@@ -1,9 +1,13 @@
-authenticate = (jwt, cb) => {
+import { signout } from './api-auth.js'
+
+const auth = {
+
+authenticate(jwt, cb) {
     if (typeof window !== "undefined")
         sessionStorage.setItem('jwt', JSON.stringify(jwt))
     cb()
-}
-isAuthenticated = () => {
+},
+isAuthenticated() {
     if (typeof window == "undefined")
         return false
 
@@ -12,9 +16,9 @@ isAuthenticated = () => {
     
             else
         return false
-}
+},
 
-clearJWT = (cb) => {
+clearJWT(cb) {
     if (typeof window !== "undefined")
         sessionStorage.removeItem('jwt')
     cb()
@@ -22,3 +26,6 @@ clearJWT = (cb) => {
         document.cookie = "t=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
     })
 }
+}
+
+export default auth
